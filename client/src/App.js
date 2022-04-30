@@ -2,6 +2,7 @@
 import Navbar from './components/Navbar';
 import {BrowserRouter, Route, Routes, Link} from 'react-router-dom';
 import Home from './screens/Home';
+import Booking from './screens/booking';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          <Route path="/booking/:id" element={<Booking/>}/>
         </Routes>
       </BrowserRouter>
     </div>

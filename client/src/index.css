@@ -5,3 +5,7 @@ body{
 .btn-primary{
     background-color: black !important;
 }
+
+.to-the-right{
+    float: right;
+}
