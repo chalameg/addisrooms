@@ -11,5 +11,16 @@ router.get("/getallrooms", async(req, res)=>{
     };
 });
 
+router.get("/getroom/:id", async(req, res)=>{
+    const { id } = req.params;
+    try{
+        const data = await Room.find(id);
+        res.json({data});
+    }catch(error){
+        res.status(400).json({message: error});
+    };
+});
+
+
 
 module.exports = router;
