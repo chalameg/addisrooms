@@ -17,7 +17,7 @@ router.get("/getroom/:id", async (req, res)=>{
     // console.log(id);
     try{
         const data = await Room.findById(id);
-        // console.log(data)
+        console.log(data)
         res.json({data});
     }catch(error){
         // console.log(error)
