@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Room from "../components/Room";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 function Home() {
   const [rooms, setRooms] = useState([]);
@@ -31,9 +33,9 @@ function Home() {
     <div className="container">
       <div className="row justify-content-center mt-3">
         {loading ? (
-          <h1>Loading...</h1>
-        ) : error !== "" ? (
-          <h1>Error Occured {error}</h1>
+          <Loader/>
+        ) : error ? (
+          <Error/>
         ) : (
           rooms.map((room, i) => {
             return (

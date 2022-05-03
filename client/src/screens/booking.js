@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {useLocation} from 'react-router-dom'
 import axios from "axios";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 function Booking() {
   const [room, setRoom] = useState([]);
@@ -14,12 +16,12 @@ function Booking() {
   // console.log(roomId)
   
   useEffect(() => {
-    const getRooms = async () => {
+    const getRoom = async () => {
       
       try {
         setLoading(true);
 
-        const { data } = await axios.get(`/api/rooms/getroom/${roomId}`);
+        const { data } = await axios.get(`/api/rooms/getroom/${roomId}`); 
 
         setRoom(data.data);
 
@@ -32,16 +34,16 @@ function Booking() {
       }
     };
 
-    getRooms();
+    getRoom();
   }, []);
 
   return (
     <div className="container">
       <div className="row justify-content-center mt-5 shadow bg-white rounded p-2">
         {loading ? (
-          <h1>Loading...</h1>
-        ) : error !== "" ? (
-          <h1>Error Occured {error}</h1>
+          <Loader/>
+        ) : error ? (
+          <Error/>
         ) : (
           <div className="row">
             <div className="col-md-6">

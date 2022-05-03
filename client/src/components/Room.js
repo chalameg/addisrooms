@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Carousel } from "react-bootstrap";
+import {Link} from 'react-router-dom';
 
 function Room({ room }) {
   const [show, setShow] = useState(false);
@@ -20,7 +21,9 @@ function Room({ room }) {
           <div className="row">
             <div className="col-md-6"></div>
             <div className="col-md-3">
-              <button className="btn btn-primary">book now</button>
+              <Link to={`/book/${room._id}`}>
+                <button className="btn btn-primary">book now</button>
+              </Link>
             </div>
             <div className="col-md-3">
               <button className="btn btn-primary" onClick={handleShow}>view details</button>
