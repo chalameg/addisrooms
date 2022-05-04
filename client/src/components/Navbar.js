@@ -11,10 +11,10 @@ function Navbar() {
     <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
-          <a className="nav-link active" href="/register">Register</a>
+          <a className="nav-link" href="/register">Register</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/">Login</a>
+          <a className="nav-link" href="/login">Login</a>
         </li>
       </ul>
     </div>
