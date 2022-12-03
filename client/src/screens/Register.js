@@ -1,22 +1,31 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function Register() {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [cpassword, setCPassword] = useState("")
-    const [error, setError] = useState("")
-    const register = () =>{
-        if(password===cpassword){
-            const user = {
-                name, email, password
-            }
-            setError("")
-            console.log(user)
-        }else{
-            setError("Please confirm the password!")
-        }
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCPassword] = useState("");
+  const [error, setError] = useState("");
+  const register = async() => {
+    if (password === cpassword) {
+      const user = {
+        name,
+        email,
+        password,
+      };
+      try {
+        const res = await axios.post("api/auth/register", user);
+        console.log(res.data);
+        setError("");
+      } catch (error) {
+        // console.log(error.response.data)
+        setError(error.response.data.message)
+      }
+    } else {
+      setError("Please confirm the password!");
     }
+  };
   return (
     <section className="vh-100" style={{ backgroundColor: "#eee" }}>
       <div className="container h-100">
@@ -29,11 +38,15 @@ function Register() {
                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       Sign up
                     </p>
-                    
+
                     <form className="mx-1 mx-md-4">
-                    <div className="d-flex flex-row align-items-center mb-4 alert alert-danger">{error? (<span>{error}</span>) : ""}</div>
+                      {error ? (
+                        <div className=" alert alert-danger">{error}</div>
+                      ) : (
+                        <span></span>
+                      )}
+
                       <div className="d-flex flex-row align-items-center mb-4">
-                          
                         <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div className="form-outline flex-fill mb-0">
                           <input
@@ -42,9 +55,8 @@ function Register() {
                             className="form-control"
                             placeholder="Name"
                             value={name}
-                            onChange={(e)=> setName(e.target.value)}
+                            onChange={(e) => setName(e.target.value)}
                           />
-                          
                         </div>
                       </div>
 
@@ -57,9 +69,8 @@ function Register() {
                             className="form-control"
                             placeholder="Email"
                             value={email}
-                            onChange={(e)=> setEmail(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
-                          
                         </div>
                       </div>
 
@@ -72,9 +83,8 @@ function Register() {
                             className="form-control"
                             placeholder="Password"
                             value={password}
-                            onChange={(e)=> setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
-                          
                         </div>
                       </div>
 
@@ -87,9 +97,8 @@ function Register() {
                             className="form-control"
                             placeholder="Repeat your password"
                             value={cpassword}
-                            onChange={(e)=> setCPassword(e.target.value)}
+                            onChange={(e) => setCPassword(e.target.value)}
                           />
-                          
                         </div>
                       </div>
 
@@ -98,7 +107,6 @@ function Register() {
                           className="form-check-input me-2"
                           type="checkbox"
                           value=""
-                          
                         />
                         <label className="form-check-label">
                           I agree all statements in{" "}
@@ -107,7 +115,11 @@ function Register() {
                       </div>
 
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <button type="button" className="btn btn-primary btn-lg" onClick={register}>
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-lg"
+                          onClick={register}
+                        >
                           Register
                         </button>
                       </div>
